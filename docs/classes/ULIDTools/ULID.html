@@ -50,6 +50,7 @@ Superclass:
 <h3>Public Instance</h3>
 <ol>
 <li><a href="#method-i-3C-3D-3E"><=></a></li>
+<li><a href="#method-i-inspect">inspect</a></li>
 <li><a href="#attribute-i-raw">raw</a></li>
 <li><a href="#method-i-time">time</a></li>
 <li><a href="#method-i-to_s">to_s</a></li>
@@ -123,7 +124,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-new-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-c-new-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 18</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">opts</span> = {})&#x000A;  <span class="ruby-ivar">@raw</span> = <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:raw</span>) <span class="ruby-keyword">do</span>&#x000A;    <span class="ruby-identifier">generate_bytestring</span>(<span class="ruby-identifier">opts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:time</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>))&#x000A;  <span class="ruby-keyword">end</span>&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-c-new-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 19</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">opts</span> = {})&#x000A;  <span class="ruby-ivar">@raw</span> = <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:raw</span>) <span class="ruby-keyword">do</span>&#x000A;    <span class="ruby-identifier">generate_bytestring</span>(<span class="ruby-identifier">opts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:time</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>))&#x000A;  <span class="ruby-keyword">end</span>&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 <h2>Public Instance methods</h2>
@@ -143,7 +144,26 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-3C-3D-3E-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-3C-3D-3E-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 47</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)&#x000A;  <span class="ruby-identifier">raw</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">raw</span>&#x000A;<span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>&#x000A;  <span class="ruby-keyword">nil</span>&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-i-3C-3D-3E-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 60</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)&#x000A;  <span class="ruby-identifier">raw</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">raw</span>&#x000A;<span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>&#x000A;  <span class="ruby-keyword">nil</span>&#x000A;<span class="ruby-keyword">end</span></pre>
+</div>
+</div>
+<div class='method public-instance' id='method-method-i-inspect'>
+<a name='method-i-inspect'></a>
+<div class='synopsis'>
+<span class='name'>inspect</span>
+<span class='arguments'>()</span>
+
+</div>
+<div class='description'>
+
+<p>A user-facing representation of the <a href="ULID.html"><code>ULID</code></a></p>
+
+</div>
+<div class='source'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-inspect-source&#39;); return false'>
+[show source]
+</a>
+<pre id='method-i-inspect-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 37</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>&#x000A;  <span class="ruby-identifier">strep</span> = <span class="ruby-string">&quot;&quot;</span>&#x000A;  <span class="ruby-identifier">strep</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&lt;&quot;</span>&#x000A;  <span class="ruby-identifier">strep</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;ULIDTools::ULID @to_s=\&quot;#{to_s}\&quot; &quot;</span>&#x000A;  <span class="ruby-identifier">strep</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;@raw=\&quot;#{raw.inspect[1..-1]}&quot;</span>&#x000A;  <span class="ruby-identifier">strep</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;@to_uuid=\&quot;#{to_uuid}\&quot;&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@to_uuid</span>&#x000A;  <span class="ruby-identifier">strep</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;@time=#{time}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@time</span>&#x000A;  <span class="ruby-identifier">strep</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&gt;&quot;</span>&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 <div class='method public-instance' id='method-method-i-time'>
@@ -162,7 +182,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-time-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-time-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 40</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">time</span>&#x000A;  <span class="ruby-ivar">@time</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@time</span>.<span class="ruby-identifier">nil?</span>&#x000A;  (<span class="ruby-identifier">ms</span>,) = <span class="ruby-node">&quot;\x0\x0#{raw[0..6]}&quot;</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&#39;Q&gt;&#39;</span>)&#x000A;  <span class="ruby-ivar">@time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-identifier">ms</span> <span class="ruby-operator">/</span> <span class="ruby-value">1000.0</span>).<span class="ruby-identifier">utc</span>&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-i-time-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 53</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">time</span>&#x000A;  <span class="ruby-ivar">@time</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@time</span>&#x000A;  (<span class="ruby-identifier">ms</span>,) = <span class="ruby-node">&quot;\x0\x0#{raw[0..6]}&quot;</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&#39;Q&gt;&#39;</span>)&#x000A;  <span class="ruby-ivar">@time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-identifier">ms</span> <span class="ruby-operator">/</span> <span class="ruby-value">1000.0</span>).<span class="ruby-identifier">utc</span>&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 <div class='method public-instance' id='method-method-i-to_s'>
@@ -181,7 +201,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-to_s-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-to_s-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 25</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>&#x000A;  <span class="ruby-constant">Base32</span><span class="ruby-operator">::</span><span class="ruby-constant">Crockford</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">ulid_bitmath</span>, <span class="ruby-value">length:</span> <span class="ruby-value">26</span>)&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-i-to_s-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 26</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>&#x000A;  <span class="ruby-ivar">@to_s</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@to_s</span>&#x000A;  <span class="ruby-ivar">@to_s</span> = <span class="ruby-constant">Base32</span><span class="ruby-operator">::</span><span class="ruby-constant">Crockford</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">ulid_bitmath</span>, <span class="ruby-value">length:</span> <span class="ruby-value">26</span>)&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 <div class='method public-instance' id='method-method-i-to_str'>
@@ -200,7 +220,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-to_str-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-to_str-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 30</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_str</span>&#x000A;  <span class="ruby-identifier">to_s</span>&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-i-to_str-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 32</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_str</span>&#x000A;  <span class="ruby-identifier">to_s</span>&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 <div class='method public-instance' id='method-method-i-to_uuid'>
@@ -219,7 +239,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-to_uuid-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-to_uuid-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 35</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_uuid</span>&#x000A;  <span class="ruby-identifier">raw</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-constant">UUID_PACKING</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;-&#39;</span>)&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-i-to_uuid-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 48</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_uuid</span>&#x000A;  <span class="ruby-ivar">@to_uuid</span> = <span class="ruby-identifier">raw</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-constant">UUID_PACKING</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;-&#39;</span>)&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 <h2>Private Instance methods</h2>
@@ -239,7 +259,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-generate_bytestring-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-generate_bytestring-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 62</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_bytestring</span>(<span class="ruby-identifier">time</span>)&#x000A;  <span class="ruby-identifier">generate_time_bytes</span>(<span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">generate_random_bytes</span>&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-i-generate_bytestring-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 75</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_bytestring</span>(<span class="ruby-identifier">time</span>)&#x000A;  <span class="ruby-identifier">generate_time_bytes</span>(<span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">generate_random_bytes</span>&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 <div class='method private-instance' id='method-method-i-generate_random_bytes'>
@@ -258,7 +278,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-generate_random_bytes-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-generate_random_bytes-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 76</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_random_bytes</span>&#x000A;  <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">random_bytes</span>(<span class="ruby-value">10</span>)&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-i-generate_random_bytes-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 89</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_random_bytes</span>&#x000A;  <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">random_bytes</span>(<span class="ruby-value">10</span>)&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 <div class='method private-instance' id='method-method-i-generate_time_bytes'>
@@ -277,7 +297,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-generate_time_bytes-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-generate_time_bytes-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 67</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_time_bytes</span>(<span class="ruby-identifier">time</span>)&#x000A;  <span class="ruby-identifier">millis</span> = <span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_f</span>&#x000A;               .<span class="ruby-identifier">*</span>(<span class="ruby-value">1000</span>)&#x000A;               .<span class="ruby-identifier">to_i</span>&#x000A;&#x000A;  [<span class="ruby-identifier">millis</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&#39;Q&gt;&#39;</span>)[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-i-generate_time_bytes-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 80</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_time_bytes</span>(<span class="ruby-identifier">time</span>)&#x000A;  <span class="ruby-identifier">millis</span> = <span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_f</span>&#x000A;               .<span class="ruby-identifier">*</span>(<span class="ruby-value">1000</span>)&#x000A;               .<span class="ruby-identifier">to_i</span>&#x000A;&#x000A;  [<span class="ruby-identifier">millis</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&#39;Q&gt;&#39;</span>)[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 <div class='method private-instance' id='method-method-i-ulid_bitmath'>
@@ -296,7 +316,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-ulid_bitmath-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-ulid_bitmath-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 56</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ulid_bitmath</span>&#x000A;  (<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>) = <span class="ruby-identifier">raw</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&#39;Q&gt;Q&gt;&#39;</span>)&#x000A;  (<span class="ruby-identifier">x</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">64</span>) <span class="ruby-operator">|</span> <span class="ruby-identifier">y</span>&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-i-ulid_bitmath-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 69</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ulid_bitmath</span>&#x000A;  (<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>) = <span class="ruby-identifier">raw</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&#39;Q&gt;Q&gt;&#39;</span>)&#x000A;  (<span class="ruby-identifier">x</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">64</span>) <span class="ruby-operator">|</span> <span class="ruby-identifier">y</span>&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 </div>

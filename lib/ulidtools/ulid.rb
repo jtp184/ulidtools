@@ -1,5 +1,6 @@
 require 'securerandom'
 require 'base32/crockford'
+require 'pp'
 
 module ULIDTools # :nodoc:
   # The ULID class keeps an internal bytestring representation of itself
@@ -23,7 +24,8 @@ module ULIDTools # :nodoc:
 
     # Uses the Crockford library to encode the ULID
     def to_s
-      Base32::Crockford.encode(ulid_bitmath, length: 26)
+      @to_s if @to_s
+      @to_s = Base32::Crockford.encode(ulid_bitmath, length: 26)
     end
 
     # For implicit string conversion
@@ -31,14 +33,25 @@ module ULIDTools # :nodoc:
       to_s
     end
 
+    # A user-facing representation of the ULID
+    def inspect
+      strep = ""
+      strep << "<"
+      strep << "ULIDTools::ULID @to_s=\"#{to_s}\" "
+      strep << "@raw=\"#{raw.inspect[1..-1]}"
+      strep << " " << "@to_uuid=\"#{to_uuid}\"" if @to_uuid
+      strep << " " << "@time=#{time}" if @time
+      strep << ">"
+    end
+
     # Outputs the ULID packed instead as a UUID
     def to_uuid
-      raw.unpack(UUID_PACKING).join('-')
+      @to_uuid = raw.unpack(UUID_PACKING).join('-')
     end
 
     # Returns a time object generated from the timestamp bits
     def time
-      @time unless @time.nil?
+      @time if @time
       (ms,) = "\x0\x0#{raw[0..6]}".unpack('Q>')
       @time = Time.at(ms / 1000.0).utc
     end
