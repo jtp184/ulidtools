@@ -2,6 +2,8 @@
 
 ULIDTools is designed to provide a ruby implementation of [ULID](https://github.com/alizain/ulid) that takes advantage of their 128-bit compatibility with UUIDs. It's a little heavier weight than the main [ulid](https://github.com/rafaelsales/ulid) ruby implementation, and has methods to more easily create and manipulate ULIDs
 
+## Getting started
+
 ## Usage
 
 The ULID is stored internally as a string of bytes. The class has a few methods on it to make creating, manipulating, and storing them easier.
@@ -23,7 +25,7 @@ u2 < u1 # => true
 # You can also create ULIDs as if it was a specific time.
 # Useful for backfilling indexes
 
-u3 = ULIDTools::ULID.new(time: Time.at(728121600))
+u3 = ULIDTool.at_time(Time.at(728121600))
 
 u3.to_s # => "00N63PVT00M6VD4GJJ6D4G6TMB"
 
