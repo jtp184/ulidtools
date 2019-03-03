@@ -16,7 +16,9 @@ module ULIDTools # :nodoc:
     # the +opts+ array can directly set the +raw+ or accept a :time key to
     # Use a time other than Time.now to generate ULIDs with
     def initialize(opts = {})
-      @raw = opts.fetch(:raw) { generate_bytestring(opts.fetch(:time, Time.now)) }
+      @raw = opts.fetch(:raw) do
+        generate_bytestring(opts.fetch(:time, Time.now))
+      end
     end
 
     # Uses the Crockford library to encode the ULID
@@ -36,7 +38,7 @@ module ULIDTools # :nodoc:
 
     # Returns a time object generated from the timestamp bits
     def time
-      @time if @time
+      @time unless @time.nil?
       (ms,) = "\x0\x0#{raw[0..6]}".unpack('Q>')
       @time = Time.at(ms / 1000.0).utc
     end
