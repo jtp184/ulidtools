@@ -6,7 +6,7 @@ ULIDTools is designed to provide a ruby implementation of [ULID](https://github.
 
 The ULID is stored internally as a string of bytes. The class has a few methods on it to make creating, manipulating, and storing them easier.
 
-```ruby
+```
 u = ULIDTools.generate 
 u.raw # => "\x01iANo%pB\xCC\v\xD4N\xBB\xF4#\\"
 u.to_s # => "01D50MWVS5E11CR2YM9TXZ88TW"
