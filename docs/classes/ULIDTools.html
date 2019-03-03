@@ -82,7 +82,7 @@ ULIDTools
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-at_time-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-c-at_time-source'><span class="ruby-comment"># File lib/ulidtools.rb, line 12</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">at_time</span>(<span class="ruby-identifier">time</span>)&#x000A;      <span class="ruby-constant">ULID</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">time:</span> <span class="ruby-identifier">time</span>)&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-c-at_time-source'><span class="ruby-comment"># File lib/ulidtools.rb, line 12</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">at_time</span>(<span class="ruby-identifier">time</span>)&#x000A;  <span class="ruby-constant">ULID</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">time:</span> <span class="ruby-identifier">time</span>)&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 <div class='method public-class' id='method-method-c-generate'>
@@ -120,7 +120,7 @@ ULIDTools
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-parse_uuid-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-c-parse_uuid-source'><span class="ruby-comment"># File lib/ulidtools.rb, line 17</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_uuid</span>(<span class="ruby-identifier">uuid</span>)&#x000A;      <span class="ruby-constant">ULID</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">raw:</span> <span class="ruby-identifier">uuid</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;-&#39;</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-constant">ULID</span><span class="ruby-operator">::</span><span class="ruby-constant">UUID_PACKING</span>))&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-c-parse_uuid-source'><span class="ruby-comment"># File lib/ulidtools.rb, line 17</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_uuid</span>(<span class="ruby-identifier">uuid</span>)&#x000A;  <span class="ruby-constant">ULID</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">raw:</span> <span class="ruby-identifier">uuid</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;-&#39;</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-constant">ULID</span><span class="ruby-operator">::</span><span class="ruby-constant">UUID_PACKING</span>))&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 </div>
