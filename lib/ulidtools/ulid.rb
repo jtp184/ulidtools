@@ -16,7 +16,7 @@ module ULIDTools # :nodoc:
     # the +opts+ array can directly set the +raw+ or accept a :time key to
     # Use a time other than Time.now to generate ULIDs with
     def initialize(opts = {})
-      @raw ||= opts.fetch(:raw) { opts.fetch(:time, generate_bytestring) }
+      @raw = opts.fetch(:raw) { opts.fetch(:time, generate_bytestring) }
     end
 
     # Uses the Crockford library to encode the ULID
