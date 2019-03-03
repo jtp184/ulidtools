@@ -6,13 +6,17 @@ Given(/i want to generate a ulid/i) do
 end
 
 Given(/i send the (\w+) message to the (\w+)/i) do |msg, target|
-  @result = object_router(target).method(message_router(msg)).call
+  @result = object_router(target).method(msg.to_sym).call
+end
+
+Given(/i parse the uuid/i) do
+  @result = ULIDTools.parse_uuid(@uuid)
 end
 
 Given(/i have a ulid/i) do
   Timecop.freeze do
     @time = Time.now
-    @ulid = ULIDTools.generate
+    @ulid = @ulid1 = ULIDTools.generate
   end
 end
 
@@ -39,7 +43,7 @@ Then(/i should recieve a new ulid/i) do
   end
 end
 
-Then(/(?:is|are) correct/i) do
+Then(/(?:is|are|should be) correct/i) do
   raise "#{@result} Didn't match" unless @correct
 end
 
@@ -87,24 +91,28 @@ When(/if they are random bits/i) do
   @correct = !@result.ascii_only?
 end
 
+When(/time result/) do
+  @correct = sane_time(@result, @time)
+end
+
+Given(/i want (it|them) to be created at a specific time/i) do |plural|
+  @time = Time.at(728121600)
+
+  @ulid = @ulid1 = ULIDTools::ULID.new(time: @time)
+  @ulid2 = ULIDTools::ULID.new(time: @time) if plural == 'them'
+end
+
+When(/time returned is the time entered/i) do
+  @correct = @ulid.time == @time
+end
+
+Given(/i have a uuid/i) do
+  @result = @uuid = "0169414e-6f25-7042-cc0b-d44ebbf4235c"
+end
+
 # ==================================================
 # Helper Functions
 # ==================================================
-
-def message_router(msg)
-  case msg.downcase
-  when 'generate'
-    :generate
-  when 'string'
-    :to_s
-  when 'bytestring'
-    :raw
-  when 'uuid'
-    :to_uuid
-  else
-    raise ArgumentError, "Undefined Message #{msg}"
-  end
-end
 
 def object_router(obj)
   case obj.downcase
@@ -137,6 +145,6 @@ def format_router(fmt)
   end
 end
 
-def sane_time(time)
-  (0..5).cover?(time.to_i - Time.now.to_i)
+def sane_time(time, compare=Time.now)
+  (0..5).cover?(time.to_i - compare.to_i)
 end

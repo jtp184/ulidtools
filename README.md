@@ -1,6 +1,6 @@
 # ULIDTools
 
-ULIDTools is designed to provide a ruby implementation of [ULID](https://github.com/alizain/ulid) that takes advantage of their 128-bit compatibility to emulate some of the behavior of working with UUIDs.
+ULIDTools is designed to provide a ruby implementation of [ULID](https://github.com/alizain/ulid) that takes advantage of their 128-bit compatibility with UUIDs. It's a little heavier weight than the main [ulid](https://github.com/rafaelsales/ulid) ruby implementation, and has methods to more easily create and manipulate ULIDs
 
 ## Usage
 
@@ -19,6 +19,34 @@ sleep 5
 u2 = ULIDTools.generate
 
 u2 < u1 # => true
+
+# You can also create ULIDs as if it was a specific time.
+# Useful for backfilling indexes
+
+u3 = ULIDTools::ULID.new(time: Time.at(728121600)).to_s # => "00N63PVT00M6VD4GJJ6D4G6TMB"
+
+# And ULIDs know their timestamps as well
+
+u3.time # => 1993-01-27 00:00:00 -0800
+
+
+# You can use a PoR object in Rails to serialize ULIDs to UUIDs. Here's an example for Postgres
+
+# Somewhere
+class ULIDSerializer
+	def self.load(uuid)
+    ULIDTools.parse_uuid(uuid)
+  end
+
+  def self.dump(ulid)
+    ulid.to_uuid
+  end
+end
+
+# In the Model
+class SomeModel < ApplicationRecord
+  serialize :ulid, ULIDSerializer
+end
 
 ```
 

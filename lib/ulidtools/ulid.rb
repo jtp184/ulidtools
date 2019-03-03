@@ -16,7 +16,7 @@ module ULIDTools # :nodoc:
     # the +opts+ array can directly set the +raw+ or accept a :time key to
     # Use a time other than Time.now to generate ULIDs with
     def initialize(opts = {})
-      @raw = opts.fetch(:raw) { opts.fetch(:time, generate_bytestring) }
+      @raw = opts.fetch(:raw) { generate_bytestring(opts.fetch(:time, Time.now)) }
     end
 
     # Uses the Crockford library to encode the ULID
@@ -32,6 +32,13 @@ module ULIDTools # :nodoc:
     # Outputs the ULID packed instead as a UUID
     def to_uuid
       raw.unpack(UUID_PACKING).join('-')
+    end
+
+    # Returns a time object generated from the timestamp bits
+    def time
+      @time if @time
+      (ms,) = "\x0\x0#{raw[0..6]}".unpack('Q>')
+      @time = Time.at(ms / 1000.0).utc
     end
 
     # Compares to +other+ via the ULID#raw method
@@ -51,7 +58,7 @@ module ULIDTools # :nodoc:
 
     # Takes the +time+, processes it and adds it to the random bytes
     def generate_bytestring(time = Time.now)
-      generate_time_bytes(time) + generate_random_bytes
+      generate_time_bytes(time.to_i) + generate_random_bytes
     end
 
     # Packs the +time+ into a bytestring

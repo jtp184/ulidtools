@@ -6,7 +6,7 @@ Needs to rigorously conform to spec.
 Scenario: Creates valid Crockford
 
 Given I have a ULID
-And I send the string message to the ULID
+And I send the to_s message to the ULID
 When I check if it is valid Crockford
 Then it is correct
 
