@@ -44,7 +44,7 @@ Then(/i should recieve a new ulid/i) do
 end
 
 Then(/(?:is|are|should be) correct/i) do
-  raise "#{@result} Didn't match" unless @correct
+  raise "#{@result.inspect} Didn't match" unless @correct
 end
 
 When(/valid crockford/i) do
@@ -108,6 +108,23 @@ end
 
 Given(/i have a uuid/i) do
   @result = @uuid = "0169414e-6f25-7042-cc0b-d44ebbf4235c"
+end
+
+When(/the binary timestamp is accurate/i) do
+  r = @ulid.raw
+  (ms,) = "\x0\x0#{r[0..6]}".unpack('Q>')
+  @result = Time.at(ms / 1000.0).utc
+  @correct = @result == @time
+end
+
+When(/compare the uuid and ulid/i) do
+  @correct = (@ulid.to_uuid == @uuid) && (@ulid.to_s == ULIDTools.parse_uuid(@uuid).to_s)
+end
+
+Given(/i have a unique ulid and uuid/i) do
+  r = [0, 169, 135, 109, 232, 0, 113, 111, 6, 114, 209, 182, 253, 47, 214, 155].map(&:chr).join
+  @ulid = @ulid1 = ULIDTools::ULID.new(raw: r)
+  @uuid = r.unpack(ULIDTools::ULID::UUID_PACKING).join('-')
 end
 
 # ==================================================

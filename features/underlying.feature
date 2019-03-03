@@ -1,6 +1,6 @@
 Feature: Underlying Representation
 
-Needs to rigorously conform to spec.
+Needs to rigorously conform to spec, and not promise behavior we don't have
 
 # ==================================================
 Scenario: Creates valid Crockford
@@ -33,3 +33,18 @@ Given I have a ULID
 And I check the last 10 bytes
 When I check if they are random bits
 Then they are correct
+
+# ==================================================
+Scenario: Timestamp returned is binary accurate
+
+Given I have a ULID
+But I want it to be created at a specific time
+When I check that the binary timestamp is accurate
+Then it should be correct
+
+# ==================================================
+Scenario: UUIDs produced translate back into ULIDs correctly
+
+Given I have a unique ULID and UUID
+When I compare the UUID and ULID
+Then they should be correct
