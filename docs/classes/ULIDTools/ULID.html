@@ -56,6 +56,13 @@ Superclass:
 <li><a href="#method-i-to_str">to_str</a></li>
 <li><a href="#method-i-to_uuid">to_uuid</a></li>
 </ol>
+<h3>Private Instance</h3>
+<ol>
+<li><a href="#method-i-generate_bytestring">generate_bytestring</a></li>
+<li><a href="#method-i-generate_random_bytes">generate_random_bytes</a></li>
+<li><a href="#method-i-generate_time_bytes">generate_time_bytes</a></li>
+<li><a href="#method-i-ulid_bitmath">ulid_bitmath</a></li>
+</ol>
 </div>
 <div id='context'>
 <div id='includes'>
@@ -213,6 +220,83 @@ Superclass:
 [show source]
 </a>
 <pre id='method-i-to_uuid-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 35</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_uuid</span>&#x000A;  <span class="ruby-identifier">raw</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-constant">UUID_PACKING</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;-&#39;</span>)&#x000A;<span class="ruby-keyword">end</span></pre>
+</div>
+</div>
+<h2>Private Instance methods</h2>
+<div class='method private-instance' id='method-method-i-generate_bytestring'>
+<a name='method-i-generate_bytestring'></a>
+<div class='synopsis'>
+<span class='name'>generate_bytestring</span>
+<span class='arguments'>(time = Time.now)</span>
+
+</div>
+<div class='description'>
+
+<p>Takes the <code>time</code>, processes it and adds it to the random bytes</p>
+
+</div>
+<div class='source'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-generate_bytestring-source&#39;); return false'>
+[show source]
+</a>
+<pre id='method-i-generate_bytestring-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 62</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_bytestring</span>(<span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)&#x000A;  <span class="ruby-identifier">generate_time_bytes</span>(<span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">generate_random_bytes</span>&#x000A;<span class="ruby-keyword">end</span></pre>
+</div>
+</div>
+<div class='method private-instance' id='method-method-i-generate_random_bytes'>
+<a name='method-i-generate_random_bytes'></a>
+<div class='synopsis'>
+<span class='name'>generate_random_bytes</span>
+<span class='arguments'>()</span>
+
+</div>
+<div class='description'>
+
+<p>Uses SecureRandom to make the 10 random bytes</p>
+
+</div>
+<div class='source'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-generate_random_bytes-source&#39;); return false'>
+[show source]
+</a>
+<pre id='method-i-generate_random_bytes-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 76</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_random_bytes</span>&#x000A;  <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">random_bytes</span>(<span class="ruby-value">10</span>)&#x000A;<span class="ruby-keyword">end</span></pre>
+</div>
+</div>
+<div class='method private-instance' id='method-method-i-generate_time_bytes'>
+<a name='method-i-generate_time_bytes'></a>
+<div class='synopsis'>
+<span class='name'>generate_time_bytes</span>
+<span class='arguments'>(time)</span>
+
+</div>
+<div class='description'>
+
+<p>Packs the <code>time</code> into a bytestring</p>
+
+</div>
+<div class='source'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-generate_time_bytes-source&#39;); return false'>
+[show source]
+</a>
+<pre id='method-i-generate_time_bytes-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 67</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_time_bytes</span>(<span class="ruby-identifier">time</span>)&#x000A;  <span class="ruby-identifier">millis</span> = <span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_f</span>&#x000A;               .<span class="ruby-identifier">*</span>(<span class="ruby-value">1000</span>)&#x000A;               .<span class="ruby-identifier">to_i</span>&#x000A;&#x000A;  [<span class="ruby-identifier">millis</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&#39;Q&gt;&#39;</span>)[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]&#x000A;<span class="ruby-keyword">end</span></pre>
+</div>
+</div>
+<div class='method private-instance' id='method-method-i-ulid_bitmath'>
+<a name='method-i-ulid_bitmath'></a>
+<div class='synopsis'>
+<span class='name'>ulid_bitmath</span>
+<span class='arguments'>()</span>
+
+</div>
+<div class='description'>
+
+<p>Does the bitmath to prep the bytestring for Crockford encoding</p>
+
+</div>
+<div class='source'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-ulid_bitmath-source&#39;); return false'>
+[show source]
+</a>
+<pre id='method-i-ulid_bitmath-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 56</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ulid_bitmath</span>&#x000A;  (<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>) = <span class="ruby-identifier">raw</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&#39;Q&gt;Q&gt;&#39;</span>)&#x000A;  (<span class="ruby-identifier">x</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">64</span>) <span class="ruby-operator">|</span> <span class="ruby-identifier">y</span>&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 </div>

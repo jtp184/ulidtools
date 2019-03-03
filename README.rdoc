@@ -28,8 +28,10 @@ u3 = ULIDTools::ULID.new(time: Time.at(728121600)).to_s # => "00N63PVT00M6VD4GJJ
 # And ULIDs know their timestamps as well
 
 u3.time # => 1993-01-27 00:00:00 -0800
+```
 
-
+## Rails Integration
+```ruby
 # You can use a PoR object in Rails to serialize ULIDs to UUIDs. Here's an example for Postgres
 
 # Somewhere

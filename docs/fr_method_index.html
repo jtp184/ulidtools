@@ -4335,10 +4335,14 @@ var search_index = [
   { method: 'new', module: 'ulidtools::ulid', html: '<a href="classes/ULIDTools/ULID.html#method-c-new"><span class="method_name">::new</span> <span class="module_name">(ULIDTools::ULID)</span></a>' },
   { method: 'parse_uuid', module: 'ulidtools', html: '<a href="classes/ULIDTools.html#method-c-parse_uuid"><span class="method_name">::parse_uuid</span> <span class="module_name">(ULIDTools)</span></a>' },
   { method: '<=>', module: 'ulidtools::ulid', html: '<a href="classes/ULIDTools/ULID.html#method-i-3C-3D-3E"><span class="method_name">#&lt;=&gt;</span> <span class="module_name">(ULIDTools::ULID)</span></a>' },
+  { method: 'generate_bytestring', module: 'ulidtools::ulid', html: '<a href="classes/ULIDTools/ULID.html#method-i-generate_bytestring"><span class="method_name">#generate_bytestring</span> <span class="module_name">(ULIDTools::ULID)</span></a>' },
+  { method: 'generate_random_bytes', module: 'ulidtools::ulid', html: '<a href="classes/ULIDTools/ULID.html#method-i-generate_random_bytes"><span class="method_name">#generate_random_bytes</span> <span class="module_name">(ULIDTools::ULID)</span></a>' },
+  { method: 'generate_time_bytes', module: 'ulidtools::ulid', html: '<a href="classes/ULIDTools/ULID.html#method-i-generate_time_bytes"><span class="method_name">#generate_time_bytes</span> <span class="module_name">(ULIDTools::ULID)</span></a>' },
   { method: 'time', module: 'ulidtools::ulid', html: '<a href="classes/ULIDTools/ULID.html#method-i-time"><span class="method_name">#time</span> <span class="module_name">(ULIDTools::ULID)</span></a>' },
   { method: 'to_s', module: 'ulidtools::ulid', html: '<a href="classes/ULIDTools/ULID.html#method-i-to_s"><span class="method_name">#to_s</span> <span class="module_name">(ULIDTools::ULID)</span></a>' },
   { method: 'to_str', module: 'ulidtools::ulid', html: '<a href="classes/ULIDTools/ULID.html#method-i-to_str"><span class="method_name">#to_str</span> <span class="module_name">(ULIDTools::ULID)</span></a>' },
   { method: 'to_uuid', module: 'ulidtools::ulid', html: '<a href="classes/ULIDTools/ULID.html#method-i-to_uuid"><span class="method_name">#to_uuid</span> <span class="module_name">(ULIDTools::ULID)</span></a>' },
+  { method: 'ulid_bitmath', module: 'ulidtools::ulid', html: '<a href="classes/ULIDTools/ULID.html#method-i-ulid_bitmath"><span class="method_name">#ulid_bitmath</span> <span class="module_name">(ULIDTools::ULID)</span></a>' },
   { method: 'raw', module: 'ulidtools::ulid', html: '<a href="classes/ULIDTools/ULID.html#attribute-i-raw"><span class="method_name">#raw</span> <span class="module_name">(ULIDTools::ULID)</span></a>' },
 ]
 $(document).observe('dom:loaded', function() {
@@ -4417,10 +4421,14 @@ function performSearch() {
 <li><a href="classes/ULIDTools/ULID.html#method-c-new"><span class="method_name">::new</span> <span class="module_name">(ULIDTools::ULID)</span></a></li>
 <li><a href="classes/ULIDTools.html#method-c-parse_uuid"><span class="method_name">::parse_uuid</span> <span class="module_name">(ULIDTools)</span></a></li>
 <li><a href="classes/ULIDTools/ULID.html#method-i-3C-3D-3E"><span class="method_name">#&lt;=&gt;</span> <span class="module_name">(ULIDTools::ULID)</span></a></li>
+<li><a href="classes/ULIDTools/ULID.html#method-i-generate_bytestring"><span class="method_name">#generate_bytestring</span> <span class="module_name">(ULIDTools::ULID)</span></a></li>
+<li><a href="classes/ULIDTools/ULID.html#method-i-generate_random_bytes"><span class="method_name">#generate_random_bytes</span> <span class="module_name">(ULIDTools::ULID)</span></a></li>
+<li><a href="classes/ULIDTools/ULID.html#method-i-generate_time_bytes"><span class="method_name">#generate_time_bytes</span> <span class="module_name">(ULIDTools::ULID)</span></a></li>
 <li><a href="classes/ULIDTools/ULID.html#method-i-time"><span class="method_name">#time</span> <span class="module_name">(ULIDTools::ULID)</span></a></li>
 <li><a href="classes/ULIDTools/ULID.html#method-i-to_s"><span class="method_name">#to_s</span> <span class="module_name">(ULIDTools::ULID)</span></a></li>
 <li><a href="classes/ULIDTools/ULID.html#method-i-to_str"><span class="method_name">#to_str</span> <span class="module_name">(ULIDTools::ULID)</span></a></li>
 <li><a href="classes/ULIDTools/ULID.html#method-i-to_uuid"><span class="method_name">#to_uuid</span> <span class="module_name">(ULIDTools::ULID)</span></a></li>
+<li><a href="classes/ULIDTools/ULID.html#method-i-ulid_bitmath"><span class="method_name">#ulid_bitmath</span> <span class="module_name">(ULIDTools::ULID)</span></a></li>
 </ol>
 </div>
 </body>
