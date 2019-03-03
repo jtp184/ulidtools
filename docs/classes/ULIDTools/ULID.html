@@ -227,7 +227,7 @@ Superclass:
 <a name='method-i-generate_bytestring'></a>
 <div class='synopsis'>
 <span class='name'>generate_bytestring</span>
-<span class='arguments'>(time = Time.now)</span>
+<span class='arguments'>(time)</span>
 
 </div>
 <div class='description'>
@@ -239,7 +239,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-generate_bytestring-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-generate_bytestring-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 62</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_bytestring</span>(<span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)&#x000A;  <span class="ruby-identifier">generate_time_bytes</span>(<span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">generate_random_bytes</span>&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-i-generate_bytestring-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 62</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_bytestring</span>(<span class="ruby-identifier">time</span>)&#x000A;  <span class="ruby-identifier">generate_time_bytes</span>(<span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">generate_random_bytes</span>&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 <div class='method private-instance' id='method-method-i-generate_random_bytes'>
