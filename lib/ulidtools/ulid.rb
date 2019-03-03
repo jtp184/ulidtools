@@ -59,7 +59,7 @@ module ULIDTools # :nodoc:
     end
 
     # Takes the +time+, processes it and adds it to the random bytes
-    def generate_bytestring(time = Time.now)
+    def generate_bytestring(time)
       generate_time_bytes(time.to_i) + generate_random_bytes
     end
 
