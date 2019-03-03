@@ -13,3 +13,7 @@ task :docs do
 end
 
 task :prep => [:test, :docs]
+
+task :gitgo => [:prep] do
+	sh 'git add . && git commit && git push'
+end
