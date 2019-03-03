@@ -11,3 +11,5 @@ task :docs do
 	sh 'rdoc --format=hanna --all lib'
 	sh 'mv doc docs'
 end
+
+task :prep => [:test, :docs]
