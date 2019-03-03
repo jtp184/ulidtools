@@ -115,7 +115,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-new-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-c-new-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 18</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">opts</span> = {})&#x000A;  <span class="ruby-ivar">@raw</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:raw</span>) { <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:time</span>, <span class="ruby-identifier">generate_bytestring</span>) }&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-c-new-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 18</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">opts</span> = {})&#x000A;  <span class="ruby-ivar">@raw</span> = <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:raw</span>) { <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:time</span>, <span class="ruby-identifier">generate_bytestring</span>) }&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 <h2>Public Instance methods</h2>
