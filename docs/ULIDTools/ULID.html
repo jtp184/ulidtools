@@ -60,7 +60,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../Object.html">Object</a>
+  <p class="link">Object
   
 </div>
 
@@ -106,6 +106,8 @@
 
   <section class="description">
     
+<p>The <a href="ULID.html"><code>ULID</code></a> class keeps an internal bytestring representation of itself and facilitates other representations.</p>
+
   </section>
 
   
@@ -123,7 +125,7 @@
       
         <dt id="UUID_PACKING">UUID_PACKING
         
-        <dd>
+        <dd><p>Format string to pack the string as a UUID instead of a <a href="ULID.html"><code>ULID</code></a></p>
         
       
       </dl>
@@ -145,7 +147,7 @@
 
         <div class="method-description">
         
-        
+        <p>The raw representation is a bytestring copy of the <a href="ULID.html"><code>ULID</code></a></p>
         
         </div>
       </div>
@@ -173,13 +175,13 @@
 
         <div class="method-description">
           
-          
+          <p>the <code>opts</code> array can directly set the <code>raw</code> or accept a :time key to Use a time other than Time.now to generate ULIDs with</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 12</span>
+            <pre><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">opts</span> = {})
   <span class="ruby-ivar">@raw</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:raw</span>) { <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:time</span>, <span class="ruby-identifier">generate_bytestring</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -214,13 +216,13 @@
 
         <div class="method-description">
           
-          
+          <p>Compares to <code>other</code> via the <a href="ULID.html#attribute-i-raw"><code>ULID#raw</code></a> method</p>
           
           
 
           
           <div class="method-source-code" id="3C-3D-3E-source">
-            <pre><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 28</span>
+            <pre><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-identifier">raw</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">raw</span>
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>
@@ -249,13 +251,13 @@
 
         <div class="method-description">
           
-          
+          <p>Uses the Crockford library to encode the <a href="ULID.html"><code>ULID</code></a></p>
           
           
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 16</span>
+            <pre><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
   <span class="ruby-constant">Base32</span><span class="ruby-operator">::</span><span class="ruby-constant">Crockford</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">ulid_bitmath</span>, <span class="ruby-value">length:</span> <span class="ruby-value">26</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -282,13 +284,13 @@
 
         <div class="method-description">
           
-          
+          <p>For implicit string conversion</p>
           
           
 
           
           <div class="method-source-code" id="to_str-source">
-            <pre><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 20</span>
+            <pre><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_str</span>
   <span class="ruby-identifier">to_s</span>
 <span class="ruby-keyword">end</span></pre>
@@ -315,13 +317,13 @@
 
         <div class="method-description">
           
-          
+          <p>Outputs the <a href="ULID.html"><code>ULID</code></a> packed instead as a UUID</p>
           
           
 
           
           <div class="method-source-code" id="to_uuid-source">
-            <pre><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 24</span>
+            <pre><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_uuid</span>
   <span class="ruby-identifier">raw</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-constant">UUID_PACKING</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;-&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
