@@ -11,7 +11,7 @@ module ULIDTools # :nodoc:
     UUID_PACKING = 'H8H4H4H4H12'.freeze
 
     # The raw representation is a bytestring copy of the ULID
-    attr_accessor :raw
+    attr_reader :raw
 
     # the +opts+ array can directly set the +raw+ or accept a :time key to
     # Use a time other than Time.now to generate ULIDs with
