@@ -46,7 +46,7 @@ module ULIDTools # :nodoc:
 
     # Outputs the ULID packed instead as a UUID
     def to_uuid
-      @to_uuid = raw.unpack(UUID_PACKING).join('-')
+      @to_uuid ||= raw.unpack(UUID_PACKING).join('-')
     end
 
     # Returns a time object generated from the timestamp bits
