@@ -239,7 +239,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-to_uuid-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-to_uuid-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 48</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_uuid</span>&#x000A;  <span class="ruby-ivar">@to_uuid</span> = <span class="ruby-identifier">raw</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-constant">UUID_PACKING</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;-&#39;</span>)&#x000A;<span class="ruby-keyword">end</span></pre>
+<pre id='method-i-to_uuid-source'><span class="ruby-comment"># File lib/ulidtools/ulid.rb, line 48</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_uuid</span>&#x000A;  <span class="ruby-ivar">@to_uuid</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">raw</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-constant">UUID_PACKING</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;-&#39;</span>)&#x000A;<span class="ruby-keyword">end</span></pre>
 </div>
 </div>
 <h2>Private Instance methods</h2>

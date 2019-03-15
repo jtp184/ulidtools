@@ -25,7 +25,7 @@ u2 < u1 # => true
 # You can also create ULIDs as if it was a specific time.
 # Useful for backfilling indexes
 
-u3 = ULIDTool.at_time(Time.at(728121600))
+u3 = ULIDTools.at_time(Time.at(728121600))
 
 u3.to_s # => "00N63PVT00M6VD4GJJ6D4G6TMB"
 
