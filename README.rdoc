@@ -41,6 +41,7 @@ u3.time # => 1993-01-27 00:00:00 -0800
 # Somewhere
 class ULIDSerializer
   def self.load(uuid)
+  	return nil if uuid.nil?
     ULIDTools.parse_uuid(uuid)
   end
 

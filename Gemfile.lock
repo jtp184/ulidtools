@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ulidtools (0.1.4)
+    ulidtools (0.1.5)
       base32-crockford (~> 0.1.0)
 
 GEM
