@@ -1,4 +1,4 @@
-# ULIDTools
+# ULIDTools ![travis_ci](https://travis-ci.com/jtp184/ulidtools.svg?branch=master)
 
 ULIDTools is designed to provide a ruby implementation of [ULID](https://github.com/alizain/ulid) that takes advantage of their 128-bit compatibility with UUIDs. It's a little heavier weight than the main [ulid](https://github.com/rafaelsales/ulid) ruby implementation, and has methods to more easily create and manipulate ULIDs
 
