@@ -18,20 +18,20 @@ module ULIDTools # :nodoc:
     # Use a time other than Time.now to generate ULIDs with
     def initialize(opts = {})
       @raw = opts.fetch(:raw) do
-        generate_bytestring(opts.fetch(:time, Time.now))
+        generate_bytestring(
+          opts.fetch(:time, Time.now),
+          opts.fetch(:bytes, generate_random_bytes)
+        )
       end
     end
 
     # Uses the Crockford library to encode the ULID
     def to_s
-      @to_s if @to_s
-      @to_s = Base32::Crockford.encode(ulid_bitmath, length: 26)
+      @to_s ||= Base32::Crockford.encode(ulid_bitmath, length: 26)
     end
 
     # For implicit string conversion
-    def to_str
-      to_s
-    end
+    alias to_str to_s
 
     # A user-facing representation of the ULID
     def inspect
@@ -39,8 +39,8 @@ module ULIDTools # :nodoc:
       strep << "<"
       strep << "ULIDTools::ULID @to_s=\"#{to_s}\" "
       strep << "@raw=\"#{raw.inspect[1..-1]}"
-      strep << " " << "@to_uuid=\"#{to_uuid}\"" if @to_uuid
-      strep << " " << "@time=#{time}" if @time
+      strep << " " << "@to_uuid=\"#{to_uuid}\""
+      strep << " " << "@time=#{time}"
       strep << ">"
     end
 
@@ -51,7 +51,8 @@ module ULIDTools # :nodoc:
 
     # Returns a time object generated from the timestamp bits
     def time
-      @time if @time
+      return @time if @time
+
       (ms,) = "\x0\x0#{raw[0..6]}".unpack('Q>')
       @time = Time.at(ms / 1000.0).utc
     end
@@ -72,8 +73,8 @@ module ULIDTools # :nodoc:
     end
 
     # Takes the +time+, processes it and adds it to the random bytes
-    def generate_bytestring(time)
-      generate_time_bytes(time.to_i) + generate_random_bytes
+    def generate_bytestring(time, rand_bytes)
+      generate_time_bytes(time.to_i) + rand_bytes
     end
 
     # Packs the +time+ into a bytestring
